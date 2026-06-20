@@ -1,0 +1,201 @@
+/* CAD layout setup - side nav + content area */
+.cad-layout {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: #f8fafc; /* slate-50 */
+}
+
+/* Vertical Left Navigation Bar */
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 72px;
+  background-color: #0f172a; /* slate-900 */
+  border-right: 1px solid #1e293b; /* slate-800 */
+  padding: 16px 0;
+  z-index: 30;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  user-select: none;
+}
+
+.side-nav-logo {
+  width: 32px;
+  height: 32px;
+  background-color: #0d9488; /* teal-600 */
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 14px;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.15);
+}
+
+.side-nav-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  align-items: center;
+}
+
+.side-nav-button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 56px;
+  border-radius: 8px;
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  color: #94a3b8; /* slate-400 */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  gap: 4px;
+}
+
+.side-nav-button:hover {
+  color: #ffffff;
+  background-color: #1e293b; /* slate-800 */
+}
+
+.side-nav-button.active {
+  color: #2dd4bf; /* teal-400 */
+  background-color: #020617; /* slate-950 */
+}
+
+/* Active vertical indicator bar on left */
+.side-nav-button.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 3px;
+  background-color: #2dd4bf; /* teal-400 */
+  border-radius: 0 4px 4px 0;
+}
+
+/* Vertical Content Area container (Header deck + drawing workspace) */
+.content-area {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Container for canvas and right sidebar */
+.cad-container {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.cad-container.has-sidebar {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+}
+
+.cad-container.full-width {
+  display: block;
+}
+
+/* Workspace viewport style */
+main {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Sidebar layout splits */
+.sidebar-panel-right {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background-color: #ffffff; /* pure white */
+  border-left: 1px solid #e2e8f0; /* slate-200 */
+  padding: 16px;
+  gap: 16px;
+}
+
+/* Scrollbars */
+.custom-scrollable {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+/* Top streamlined header navigation */
+.top-nav-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+}
+
+.top-nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8; /* slate-400 */
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.top-nav-item:hover:not(.disabled) {
+  color: #ffffff;
+  background-color: #1e293b; /* slate-800 */
+  border-color: #334155; /* slate-700 */
+}
+
+.top-nav-item.active {
+  color: #2dd4bf; /* teal-400 */
+  background-color: #0f172a; /* slate-900 */
+  border-color: #0d9488; /* teal-600 */
+  box-shadow: 0 1px 2px rgba(45, 212, 191, 0.15);
+}
+
+.top-nav-item.disabled {
+  color: #475569; /* slate-600 */
+  cursor: not-allowed;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+/* Print Overrides for cost sheet */
+@media print {
+  .cad-layout {
+    display: block !important;
+    height: auto !important;
+    width: auto !important;
+  }
+  .cad-container {
+    display: block !important;
+    height: auto !important;
+  }
+  .no-print, header, nav, .sidebar-panel-right, button, .side-nav {
+    display: none !important;
+  }
+}
